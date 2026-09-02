@@ -1,0 +1,373 @@
+﻿<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RE:GREEN - Land Intelligence</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Manrope:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-surface": "#2f3131",
+                        "secondary-container": "#caecbc",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed-dim": "#efbab0",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface-variant": "#414846",
+                        "earth-tan": "#C2B280",
+                        "inverse-primary": "#aacec3",
+                        "surface-tint": "#43655c",
+                        "info": "#0288D1",
+                        "border-subtle": "#E0E0E0",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed-variant": "#324e2a",
+                        "surface-variant": "#e2e2e2",
+                        "primary-fixed": "#c5eadf",
+                        "surface-container": "#eeeeee",
+                        "success": "#2E7D32",
+                        "on-primary-fixed-variant": "#2b4d44",
+                        "tertiary-fixed": "#ffdad3",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed": "#062104",
+                        "background": "#f9f9f9",
+                        "warning": "#FBC02D",
+                        "surface-bright": "#f9f9f9",
+                        "primary": "#01261f",
+                        "outline": "#717976",
+                        "primary-container": "#1a3c34",
+                        "outline-variant": "#c1c8c4",
+                        "tertiary-container": "#4f2d26",
+                        "primary-fixed-dim": "#aacec3",
+                        "error": "#ba1a1a",
+                        "on-primary-container": "#83a69c",
+                        "inverse-on-surface": "#f0f1f1",
+                        "on-primary-fixed": "#00201a",
+                        "critical": "#D32F2F",
+                        "secondary-fixed-dim": "#afd0a1",
+                        "charcoal": "#121212",
+                        "surface-container-high": "#e8e8e8",
+                        "surface-container-highest": "#e2e2e2",
+                        "secondary": "#496640",
+                        "on-tertiary-fixed": "#30130d",
+                        "on-secondary-container": "#4f6c45",
+                        "on-tertiary-fixed-variant": "#623d36",
+                        "on-surface": "#1a1c1c",
+                        "on-tertiary-container": "#c4948a",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed": "#caecbc",
+                        "surface-container-low": "#f3f3f3",
+                        "on-tertiary": "#ffffff",
+                        "surface": "#f9f9f9",
+                        "on-background": "#1a1c1c",
+                        "surface-dim": "#dadada",
+                        "tertiary": "#361812",
+                        "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "base": "8px",
+                        "margin-desktop": "32px",
+                        "margin-mobile": "16px",
+                        "max-width": "1440px",
+                        "sidebar-width": "260px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "stats-lg": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "headline-lg-mobile": ["Manrope"],
+                        "headline-xl": ["Manrope"],
+                        "body-sm": ["Inter"],
+                        "headline-lg": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "stats-lg": ["36px", { "lineHeight": "44px", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .map-pattern {
+            background-color: #f3f3f3;
+            background-image: linear-gradient(#e0e0e0 1px, transparent 1px), linear-gradient(90deg, #e0e0e0 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        
+        input[type="checkbox"]:checked {
+            background-color: #1a3c34;
+            border-color: #1a3c34;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased overflow-hidden">
+<aside class="fixed left-0 top-0 h-full w-[260px] border-r border-border-subtle bg-surface flex flex-col py-base z-50">
+<div class="px-6 py-4 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-sm" data-weight="fill" style="font-variation-settings: 'FILL' 1;">eco</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md font-bold text-primary">RE:GREEN</span>
+<span class="font-label-md text-label-md text-on-surface-variant font-normal tracking-normal text-[10px]">Smart Restoration Intelligence</span>
+</div>
+</div>
+<nav class="flex-1 overflow-y-auto mt-4 flex flex-col gap-1 px-2">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 rounded-md" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Overview</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 rounded-md" href="#">
+<span class="material-symbols-outlined">forest</span>
+<span class="font-label-md text-label-md">Restoration Projects</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-surface-container text-primary border-l-4 border-primary opacity-90 transition-all duration-150 rounded-r-md rounded-l-none" href="#">
+<span class="material-symbols-outlined">map</span>
+<span class="font-label-md text-label-md">Land Intelligence</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 rounded-md" href="#">
+<span class="material-symbols-outlined">visibility</span>
+<span class="font-label-md text-label-md">Monitoring</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 rounded-md" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-label-md text-label-md">Community</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 rounded-md" href="#">
+<span class="material-symbols-outlined">assessment</span>
+<span class="font-label-md text-label-md">Impact Reports</span>
+</a>
+</nav>
+<div class="px-2 mt-auto flex flex-col gap-1 border-t border-border-subtle pt-4">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 rounded-md" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 rounded-md" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-md text-label-md">Help Center</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 rounded-md" href="#">
+<span class="material-symbols-outlined">account_circle</span>
+<span class="font-label-md text-label-md">User Profile</span>
+</a>
+</div>
+</aside>
+<header class="fixed top-0 right-0 left-0 flex justify-between items-center h-16 px-margin-desktop ml-[260px] bg-surface border-b border-border-subtle z-40">
+<div class="flex items-center gap-6">
+<div class="relative w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-sm">search</span>
+<input class="w-full pl-9 pr-4 py-1.5 bg-surface-container-lowest border border-border-subtle rounded text-body-sm focus:outline-none focus:border-primary transition-colors" placeholder="Search coordinates, sectors..." type="text"/>
+</div>
+</div>
+<nav class="flex h-full items-center">
+<a class="text-primary font-bold border-b-2 border-primary h-full flex items-center px-4 pt-0.5" href="#">
+<span class="font-label-md text-label-md">Kalimantan Restoration Project</span>
+</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors duration-200 w-8 h-8 rounded-full flex items-center justify-center hover:bg-surface-container-low">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors duration-200 w-8 h-8 rounded-full flex items-center justify-center hover:bg-surface-container-low">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest border border-border-subtle overflow-hidden ml-2 cursor-pointer">
+<img class="w-full h-full object-cover" data-alt="A small, professional avatar placeholder featuring a clean geometric pattern in shades of deep forest green and neutral gray, reflecting a corporate GIS aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8sgfmpkDQXE-2KfBKfiGwYsqdaD9k1LN59Wt9SbF-R_Eq4MNQoIkp5aWAX0FnHJFQ3RBo-MTTFzL89zg7ZBQHFwoEUZycOzyj-CNU1whvPlQhFzFqL7lPtqbLIv9DHnF8AnGTZ9jRirXxX-Eq4lKhZeW65sDUCGWl9epiquAR5sZF09ygzY5YmzjUgPc63guAhB2H3h4uRVAtzzvkjr6pBvboWsDoEjAWstM-2kulHn1KEHLgm_8w"/>
+</div>
+</div>
+</header>
+<main class="ml-[260px] pt-16 h-screen w-[calc(100%-260px)] relative bg-surface-container-lowest">
+<div class="absolute inset-0 z-0 bg-cover bg-center" data-alt="A highly detailed, top-down satellite map view of a vast forest region overlaid with GIS data visualizations. The image features high-resolution topographical details, interspersed with semi-transparent, neon-green heatmaps representing vegetation density (NDVI) and subtle reddish-orange zones indicating thermal anomalies. White, precise geometric boundary lines define specific land parcels, adhering strictly to a professional, data-driven, laboratory-grade corporate minimalist aesthetic. No text or UI elements in the image itself, just the pure mapped data canvas." data-location="Kalimantan" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA1cVlVsxdkvX1kgPEfEpnCHRXXzLBuR1YVkhzWbkGTeWOwcaWhgTOpzpMRUthvx3KwLK6uo5mc5A3s0Ml756fqRuFIKxRceYFv9zGTcuD4TGQb0pg4R5Bt1srs0GEM-BPzBK8zH4huWQJnXMCDFscV-SVhJG0PYV0y77zZJgQhx0MysC4paa6grny_BdfiG12ZJJN-qW8zT9aND_i3i38f-Nf2IcQZ1aKPAmgwgQq3xWhYadm5wPOU')">
+<div class="absolute inset-0 bg-primary/5"></div>
+</div>
+<div class="absolute inset-0 pointer-events-none p-gutter flex justify-between z-10">
+<div class="pointer-events-auto w-[280px] h-fit bg-surface-container-lowest border border-border-subtle rounded-lg shadow-[0px_4px_20px_rgba(0,0,0,0.04)] flex flex-col">
+<div class="px-5 py-4 border-b border-border-subtle flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">layers</span>
+<h2 class="font-headline-md text-body-md font-semibold text-primary">Layer Controls</h2>
+</div>
+<div class="p-5 flex flex-col gap-4">
+<label class="flex items-center justify-between cursor-pointer group">
+<span class="font-body-sm text-body-sm text-on-surface group-hover:text-primary transition-colors">Satellite Basemap</span>
+<input checked="" class="rounded border-border-subtle text-primary focus:ring-primary w-4 h-4 transition-colors" type="checkbox"/>
+</label>
+<label class="flex items-center justify-between cursor-pointer group">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-success"></span>
+<span class="font-body-sm text-body-sm text-on-surface group-hover:text-primary transition-colors">Vegetation Density (NDVI)</span>
+</div>
+<input checked="" class="rounded border-border-subtle text-primary focus:ring-primary w-4 h-4 transition-colors" type="checkbox"/>
+</label>
+<label class="flex items-center justify-between cursor-pointer group">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-critical"></span>
+<span class="font-body-sm text-body-sm text-on-surface group-hover:text-primary transition-colors">Fire Risk Index</span>
+</div>
+<input checked="" class="rounded border-border-subtle text-primary focus:ring-primary w-4 h-4 transition-colors" type="checkbox"/>
+</label>
+<label class="flex items-center justify-between cursor-pointer group">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-info"></span>
+<span class="font-body-sm text-body-sm text-on-surface group-hover:text-primary transition-colors">Soil Moisture Levels</span>
+</div>
+<input class="rounded border-border-subtle text-primary focus:ring-primary w-4 h-4 transition-colors" type="checkbox"/>
+</label>
+<label class="flex items-center justify-between cursor-pointer group">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-earth-tan"></span>
+<span class="font-body-sm text-body-sm text-on-surface group-hover:text-primary transition-colors">Biomass Estimate</span>
+</div>
+<input class="rounded border-border-subtle text-primary focus:ring-primary w-4 h-4 transition-colors" type="checkbox"/>
+</label>
+</div>
+<div class="px-5 py-4 bg-surface-container-low border-t border-border-subtle rounded-b-lg">
+<div class="flex justify-between items-center mb-2">
+<span class="font-label-md text-label-md text-outline">Opacity</span>
+<span class="font-label-md text-label-md text-primary">85%</span>
+</div>
+<input class="w-full h-1 bg-border-subtle rounded-lg appearance-none cursor-pointer accent-primary" max="100" min="0" type="range" value="85"/>
+</div>
+</div>
+<div class="pointer-events-auto w-[380px] h-fit max-h-[calc(100vh-140px)] bg-surface-container-lowest border border-border-subtle rounded-lg shadow-[0px_4px_20px_rgba(0,0,0,0.04)] flex flex-col overflow-hidden">
+<div class="px-6 py-5 border-b border-border-subtle flex justify-between items-start bg-surface-container-lowest">
+<div>
+<span class="font-label-md text-label-md text-outline mb-1 block">SELECTED PARCEL</span>
+<h2 class="font-headline-md text-headline-md text-primary">Sector 7G-Alpha</h2>
+<span class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+                            2Â°14'S, 114Â°53'E
+                        </span>
+</div>
+<button class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-surface-container-low text-outline transition-colors">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<div class="p-6 overflow-y-auto flex flex-col gap-6 bg-surface">
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container-lowest border border-border-subtle p-4 rounded-lg shadow-[0px_4px_20px_rgba(0,0,0,0.02)]">
+<span class="font-label-md text-label-md text-on-surface-variant block mb-2">LAND RISK INDEX</span>
+<div class="flex items-end gap-2">
+<span class="font-stats-lg text-stats-lg text-primary leading-none">32</span>
+<span class="font-body-sm text-body-sm text-outline mb-1">/100</span>
+</div>
+<div class="mt-3 w-full bg-surface-container-high rounded-full h-1.5 overflow-hidden">
+<div class="bg-success h-1.5 rounded-full" style="width: 32%"></div>
+</div>
+<span class="font-label-md text-[10px] text-success mt-2 block tracking-wider uppercase">Low Risk</span>
+</div>
+<div class="bg-surface-container-lowest border border-border-subtle p-4 rounded-lg shadow-[0px_4px_20px_rgba(0,0,0,0.02)]">
+<span class="font-label-md text-label-md text-on-surface-variant block mb-2">SOIL QUALITY</span>
+<div class="flex items-center mt-1">
+<span class="font-headline-md text-headline-md text-primary">Good</span>
+</div>
+<div class="mt-3 flex gap-1">
+<div class="h-1.5 flex-1 bg-success rounded-l-full"></div>
+<div class="h-1.5 flex-1 bg-success"></div>
+<div class="h-1.5 flex-1 bg-success"></div>
+<div class="h-1.5 flex-1 bg-surface-container-high"></div>
+<div class="h-1.5 flex-1 bg-surface-container-high rounded-r-full"></div>
+</div>
+<span class="font-label-md text-[10px] text-outline mt-2 block tracking-wider uppercase">PH 6.8 - Loamy</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-border-subtle p-5 rounded-lg">
+<div class="flex justify-between items-center mb-4">
+<span class="font-label-md text-label-md text-on-surface-variant">HISTORICAL FIRE DATA</span>
+<button class="text-primary hover:bg-surface-container-low p-1 rounded transition-colors">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+<div class="h-32 flex items-end gap-2 pb-2 border-b border-border-subtle relative">
+<div class="absolute inset-0 flex flex-col justify-between pointer-events-none opacity-20">
+<div class="border-t border-outline w-full"></div>
+<div class="border-t border-outline w-full"></div>
+<div class="border-t border-outline w-full"></div>
+<div class="border-t border-outline w-full"></div>
+</div>
+<div class="flex-1 flex flex-col justify-end items-center group relative h-full">
+<div class="w-full bg-surface-container-highest group-hover:bg-primary/20 transition-colors rounded-t" style="height: 15%;"></div>
+<span class="font-label-md text-[9px] text-outline mt-2">2019</span>
+</div>
+<div class="flex-1 flex flex-col justify-end items-center group relative h-full">
+<div class="w-full bg-warning/60 group-hover:bg-warning transition-colors rounded-t" style="height: 60%;"></div>
+<span class="font-label-md text-[9px] text-outline mt-2">2020</span>
+</div>
+<div class="flex-1 flex flex-col justify-end items-center group relative h-full">
+<div class="w-full bg-surface-container-highest group-hover:bg-primary/20 transition-colors rounded-t" style="height: 25%;"></div>
+<span class="font-label-md text-[9px] text-outline mt-2">2021</span>
+</div>
+<div class="flex-1 flex flex-col justify-end items-center group relative h-full">
+<div class="w-full bg-surface-container-highest group-hover:bg-primary/20 transition-colors rounded-t" style="height: 10%;"></div>
+<span class="font-label-md text-[9px] text-outline mt-2">2022</span>
+</div>
+<div class="flex-1 flex flex-col justify-end items-center group relative h-full">
+<div class="w-full bg-surface-container-highest group-hover:bg-primary/20 transition-colors rounded-t" style="height: 5%;"></div>
+<span class="font-label-md text-[9px] text-primary font-bold mt-2">2023</span>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-border-subtle p-4 rounded-lg flex items-center justify-between shadow-[0px_4px_20px_rgba(0,0,0,0.02)]">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-low flex items-center justify-center border border-border-subtle">
+<span class="material-symbols-outlined text-on-surface-variant">content_paste_search</span>
+</div>
+<div>
+<span class="font-body-sm text-body-sm font-semibold text-primary block">Field Report Available</span>
+<span class="font-label-md text-[11px] text-outline font-normal">Last updated 2 days ago</span>
+</div>
+</div>
+<button class="text-primary hover:bg-surface-container-low p-2 rounded-full transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined">download</span>
+</button>
+</div>
+</div>
+<div class="p-4 border-t border-border-subtle bg-surface-container-lowest">
+<button class="w-full py-2.5 px-4 bg-primary-container text-on-primary font-label-md text-label-md rounded hover:bg-primary transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">travel_explore</span>
+                        Inspect Area Deep-Dive
+                    </button>
+</div>
+</div>
+</div>
+<div class="absolute bottom-6 right-6 pointer-events-auto bg-surface-container-lowest border border-border-subtle rounded-lg shadow-[0px_4px_20px_rgba(0,0,0,0.04)] flex flex-col p-1">
+<button class="w-8 h-8 flex items-center justify-center hover:bg-surface-container-low text-on-surface transition-colors rounded" title="Zoom In">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</button>
+<div class="w-full h-px bg-border-subtle my-0.5"></div>
+<button class="w-8 h-8 flex items-center justify-center hover:bg-surface-container-low text-on-surface transition-colors rounded" title="Zoom Out">
+<span class="material-symbols-outlined text-[20px]">remove</span>
+</button>
+<div class="w-full h-px bg-border-subtle my-0.5"></div>
+<button class="w-8 h-8 flex items-center justify-center hover:bg-surface-container-low text-primary transition-colors rounded" title="My Location">
+<span class="material-symbols-outlined text-[18px]" data-weight="fill" style="font-variation-settings: 'FILL' 1;">my_location</span>
+</button>
+</div>
+</main>
+</body></html>

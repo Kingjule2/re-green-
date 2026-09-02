@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
+@import 'tailwindcss';
+
+@theme {
+    --color-background: #f9f9f9;
+    --color-surface: #f9f9f9;
+    --color-surface-dim: #dadada;
+    --color-surface-bright: #f9f9f9;
+    --color-surface-container-lowest: #ffffff;
+    --color-surface-container-low: #f3f3f3;
+    --color-surface-container: #eeeeee;
+    --color-surface-container-high: #e8e8e8;
+    --color-surface-container-highest: #e2e2e2;
+    --color-surface-variant: #e2e2e2;
+    --color-on-surface: #1a1c1c;
+    --color-on-surface-variant: #414846;
+    --color-outline: #717976;
+    --color-outline-variant: #c1c8c4;
+    --color-border-subtle: #E0E0E0;
+
+    --color-primary: #01261f;
+    --color-primary-container: #1a3c34;
+    --color-on-primary: #ffffff;
+    --color-on-primary-container: #83a69c;
+    --color-primary-fixed: #c5eadf;
+    --color-primary-fixed-dim: #aacec3;
+    --color-on-primary-fixed: #00201a;
+    --color-on-primary-fixed-variant: #2b4d44;
+
+    --color-secondary: #496640;
+    --color-secondary-container: #caecbc;
+    --color-on-secondary: #ffffff;
+    --color-on-secondary-container: #4f6c45;
+    --color-secondary-fixed: #caecbc;
+    --color-secondary-fixed-dim: #afd0a1;
+
+    --color-tertiary: #361812;
+    --color-tertiary-container: #4f2d26;
+    --color-on-tertiary: #ffffff;
+    --color-on-tertiary-container: #c4948a;
+
+    --color-success: #2E7D32;
+    --color-warning: #FBC02D;
+    --color-error: #ba1a1a;
+    --color-critical: #D32F2F;
+    --color-error-container: #ffdad6;
+    --color-on-error-container: #93000a;
+    --color-info: #0288D1;
+    --color-charcoal: #121212;
+    --color-earth-tan: #C2B280;
+
+    --font-headline-xl: 'Manrope', sans-serif;
+    --font-headline-lg: 'Manrope', sans-serif;
+    --font-headline-md: 'Manrope', sans-serif;
+    --font-headline-sm: 'Manrope', sans-serif;
+    --font-stats-lg: 'Manrope', sans-serif;
+    --font-body-lg: 'Inter', sans-serif;
+    --font-body-md: 'Inter', sans-serif;
+    --font-body-sm: 'Inter', sans-serif;
+    --font-label-md: 'Inter', sans-serif;
+    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+    --spacing-gutter: 24px;
+    --spacing-margin-desktop: 32px;
+    --spacing-margin-mobile: 16px;
+    --spacing-base: 8px;
+    --spacing-sidebar-width: 260px;
+    --spacing-max-width: 1440px;
+}
+
+.material-symbols-outlined {
+    font-family: 'Material Symbols Outlined';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: 'liga';
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+.material-symbols-outlined.filled,
+.material-symbols-outlined[data-weight="fill"] {
+    font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+.card-shadow {
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+/* Circular Progress Chart */
+.circular-chart {
+    display: block;
+    margin: 10px auto;
+    max-width: 80%;
+    max-height: 250px;
+}
+.circle-bg {
+    fill: none;
+    stroke: #eeeeee;
+    stroke-width: 3.8;
+}
+.circle {
+    fill: none;
+    stroke-width: 2.8;
+    stroke-linecap: round;
+    transition: stroke-dasharray 1s ease-out;
+}
+.percentage {
+    fill: #01261f;
+    text-anchor: middle;
+}
+

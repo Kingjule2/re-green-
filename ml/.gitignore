@@ -1,0 +1,17 @@
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+
+# Local config & secrets
+.env
+
+# Model artifacts (track these with a model registry / DVC, not git)
+models/
+*.pt
+*.onnx
+*.joblib
+*.pkl

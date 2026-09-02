@@ -1,0 +1,517 @@
+﻿<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RE:GREEN - Real-time Monitoring</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Manrope:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "inverse-surface": "#2f3131",
+                      "secondary-container": "#caecbc",
+                      "on-error": "#ffffff",
+                      "tertiary-fixed-dim": "#efbab0",
+                      "surface-container-lowest": "#ffffff",
+                      "on-surface-variant": "#414846",
+                      "earth-tan": "#C2B280",
+                      "inverse-primary": "#aacec3",
+                      "surface-tint": "#43655c",
+                      "info": "#0288D1",
+                      "border-subtle": "#E0E0E0",
+                      "on-error-container": "#93000a",
+                      "on-secondary-fixed-variant": "#324e2a",
+                      "surface-variant": "#e2e2e2",
+                      "primary-fixed": "#c5eadf",
+                      "surface-container": "#eeeeee",
+                      "success": "#2E7D32",
+                      "on-primary-fixed-variant": "#2b4d44",
+                      "tertiary-fixed": "#ffdad3",
+                      "on-secondary": "#ffffff",
+                      "on-secondary-fixed": "#062104",
+                      "background": "#f9f9f9",
+                      "warning": "#FBC02D",
+                      "surface-bright": "#f9f9f9",
+                      "primary": "#01261f",
+                      "outline": "#717976",
+                      "primary-container": "#1a3c34",
+                      "outline-variant": "#c1c8c4",
+                      "tertiary-container": "#4f2d26",
+                      "primary-fixed-dim": "#aacec3",
+                      "error": "#ba1a1a",
+                      "on-primary-container": "#83a69c",
+                      "inverse-on-surface": "#f0f1f1",
+                      "on-primary-fixed": "#00201a",
+                      "critical": "#D32F2F",
+                      "secondary-fixed-dim": "#afd0a1",
+                      "charcoal": "#121212",
+                      "surface-container-high": "#e8e8e8",
+                      "surface-container-highest": "#e2e2e2",
+                      "secondary": "#496640",
+                      "on-tertiary-fixed": "#30130d",
+                      "on-secondary-container": "#4f6c45",
+                      "on-tertiary-fixed-variant": "#623d36",
+                      "on-surface": "#1a1c1c",
+                      "on-tertiary-container": "#c4948a",
+                      "on-primary": "#ffffff",
+                      "secondary-fixed": "#caecbc",
+                      "surface-container-low": "#f3f3f3",
+                      "on-tertiary": "#ffffff",
+                      "surface": "#f9f9f9",
+                      "on-background": "#1a1c1c",
+                      "surface-dim": "#dadada",
+                      "tertiary": "#361812",
+                      "error-container": "#ffdad6"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "gutter": "24px",
+                      "base": "8px",
+                      "margin-desktop": "32px",
+                      "margin-mobile": "16px",
+                      "max-width": "1440px",
+                      "sidebar-width": "260px"
+              },
+              "fontFamily": {
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "label-md": [
+                              "Inter"
+                      ],
+                      "stats-lg": [
+                              "Manrope"
+                      ],
+                      "headline-md": [
+                              "Manrope"
+                      ],
+                      "headline-lg-mobile": [
+                              "Manrope"
+                      ],
+                      "headline-xl": [
+                              "Manrope"
+                      ],
+                      "body-sm": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Manrope"
+                      ]
+              },
+              "fontSize": {
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-md": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "stats-lg": [
+                              "36px",
+                              {
+                                      "lineHeight": "44px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "28px",
+                              {
+                                      "lineHeight": "36px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-xl": [
+                              "40px",
+                              {
+                                      "lineHeight": "48px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        body { background-color: #f9f9f9; color: #1a1c1c; }
+        .card-shadow { box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.04); }
+        
+        /* Circular Progress Chart Animation */
+        .circular-chart {
+            display: block;
+            margin: 10px auto;
+            max-width: 80%;
+            max-height: 250px;
+        }
+        .circle-bg {
+            fill: none;
+            stroke: #eeeeee;
+            stroke-width: 3.8;
+        }
+        .circle {
+            fill: none;
+            stroke-width: 2.8;
+            stroke-linecap: round;
+            animation: progress 1s ease-out forwards;
+        }
+        @keyframes progress {
+            0% {
+                stroke-dasharray: 0 100;
+            }
+        }
+        .percentage {
+            fill: #01261f;
+            text-anchor: middle;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md bg-background antialiased flex h-screen overflow-hidden">
+<!-- SideNavBar -->
+<nav class="hidden md:flex bg-surface dark:bg-charcoal fixed left-0 top-0 h-full w-[260px] border-r border-border-subtle dark:border-outline-variant flex-col py-base z-20">
+<div class="px-gutter mb-8 mt-4">
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">RE:GREEN</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Smart Restoration Intelligence</p>
+</div>
+<div class="flex flex-col gap-1 w-full">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-md text-label-md">Overview</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="forest">forest</span>
+<span class="font-label-md text-label-md">Restoration Projects</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+<span class="font-label-md text-label-md">Land Intelligence</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-surface-container dark:bg-primary-container text-primary dark:text-on-primary-container border-l-4 border-primary dark:border-primary-fixed opacity-90 transition-all duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+<span class="font-label-md text-label-md">Monitoring</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+<span class="font-label-md text-label-md">Community</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="assessment">assessment</span>
+<span class="font-label-md text-label-md">Impact Reports</span>
+</a>
+</div>
+<div class="mt-auto flex flex-col gap-1 w-full pb-4">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-label-md text-label-md">Help Center</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+<span class="font-label-md text-label-md">User Profile</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col md:ml-[260px] h-full overflow-hidden">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-charcoal border-b border-border-subtle dark:border-outline-variant flex justify-between items-center h-16 px-margin-desktop z-10 shrink-0">
+<div class="flex items-center gap-4">
+<!-- Mobile menu button placeholder -->
+<button class="md:hidden text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<nav class="hidden md:flex gap-6">
+<a class="font-label-md text-label-md text-primary dark:text-primary-fixed font-bold border-b-2 border-primary dark:border-primary-fixed pb-1" href="#">Kalimantan Restoration Project</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]" data-icon="search">search</span>
+<input class="pl-10 pr-4 py-1.5 bg-surface-container-lowest border border-border-subtle rounded-DEFAULT font-body-sm text-body-sm focus:border-primary focus:ring-0 outline-none w-64 text-on-surface placeholder:text-on-surface-variant/50" placeholder="Search parameters..." type="text"/>
+</div>
+<button class="text-on-surface-variant hover:text-primary transition-colors duration-200">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors duration-200">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<img alt="User Avatar" class="w-8 h-8 rounded-full object-cover border border-border-subtle" data-alt="A small, professional avatar portrait of a technical user in a laboratory or server room setting, clean lighting, high resolution." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqqS7e6YbApDXuZ_X3rFQa0Xfg-otUIYE3vwGXfxhNYCb2ieCEEIlh_gM6hNNRH-kvXqhEP0Tbbn_BYB1zJBkFWJ0y49dc3mz0ostHfCsFlWIBHbRTIKBv0Vyb3cQ4n0-XH6XICmV8FbcUKnG47w-wUaAakWCcDcNvbFep9YRf3gWb3Ds-O-K7cJ6hAk7-7kpi80ppe4Dvx1gZTDa1AzWVP_kGQTvK5EgLrCltv4CXlBW_U-H0KlJq"/>
+</div>
+</header>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto p-gutter bg-background">
+<div class="max-w-max-width mx-auto">
+<!-- Header -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-6 gap-4">
+<div>
+<h2 class="font-headline-xl text-headline-xl text-primary">Live Monitoring</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-1 flex items-center gap-2">
+<span class="material-symbols-outlined text-success text-[20px]" data-icon="fiber_manual_record" data-weight="fill">fiber_manual_record</span>
+                            Receiving real-time telemetry from Sector B
+                        </p>
+</div>
+<button class="bg-primary-container text-on-primary border-none rounded-DEFAULT px-4 py-2 font-label-md text-label-md flex items-center gap-2 hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="refresh">refresh</span>
+                        Force Sync
+                    </button>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-[minmax(180px,auto)]">
+<!-- Live Sensor Data Feeds (3 Cols) -->
+<div class="md:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-6">
+<!-- Soil Moisture -->
+<div class="bg-surface-container-lowest border border-border-subtle rounded-lg p-6 card-shadow flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest">Soil Moisture</span>
+<span class="material-symbols-outlined text-info" data-icon="water_drop">water_drop</span>
+</div>
+<div>
+<div class="font-stats-lg text-stats-lg text-primary">42.8%</div>
+<div class="font-body-sm text-body-sm text-success flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="trending_up">trending_up</span>
+                                    +1.2% from avg
+                                </div>
+</div>
+<div class="w-full h-10 mt-4 border-b border-border-subtle relative">
+<!-- Minimal Sparkline placeholder -->
+<svg class="w-full h-full stroke-info fill-none stroke-[2px]" viewbox="0 0 100 20">
+<path d="M0,15 L20,10 L40,12 L60,5 L80,8 L100,2"></path>
+</svg>
+</div>
+</div>
+<!-- Ambient Temp -->
+<div class="bg-surface-container-lowest border border-border-subtle rounded-lg p-6 card-shadow flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest">Ambient Temp</span>
+<span class="material-symbols-outlined text-warning" data-icon="thermostat">thermostat</span>
+</div>
+<div>
+<div class="font-stats-lg text-stats-lg text-primary">28.4Â°C</div>
+<div class="font-body-sm text-body-sm text-critical flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="warning">warning</span>
+                                    +2.1Â°C vs norm
+                                </div>
+</div>
+<div class="w-full h-10 mt-4 border-b border-border-subtle relative">
+<svg class="w-full h-full stroke-warning fill-none stroke-[2px]" viewbox="0 0 100 20">
+<path d="M0,10 L20,12 L40,8 L60,15 L80,5 L100,2"></path>
+</svg>
+</div>
+</div>
+<!-- Humidity -->
+<div class="bg-surface-container-lowest border border-border-subtle rounded-lg p-6 card-shadow flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest">Humidity</span>
+<span class="material-symbols-outlined text-secondary" data-icon="air">air</span>
+</div>
+<div>
+<div class="font-stats-lg text-stats-lg text-primary">64%</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="check_circle">check_circle</span>
+                                    Stable
+                                </div>
+</div>
+<div class="w-full h-10 mt-4 border-b border-border-subtle relative">
+<svg class="w-full h-full stroke-secondary fill-none stroke-[2px]" viewbox="0 0 100 20">
+<path d="M0,10 L20,10 L40,9 L60,11 L80,10 L100,10"></path>
+</svg>
+</div>
+</div>
+</div>
+<!-- Vegetation Recovery Chart (Span 4 Cols) -->
+<div class="md:col-span-4 bg-surface-container-lowest border border-border-subtle rounded-lg p-6 card-shadow flex flex-col items-center justify-center">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest self-start w-full mb-2">Vegetation Recovery</span>
+<svg class="circular-chart w-40 h-40" viewbox="0 0 36 36">
+<path class="circle-bg" d="M18 2.0845
+                                a 15.9155 15.9155 0 0 1 0 31.831
+                                a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+<path class="circle stroke-success" d="M18 2.0845
+                                a 15.9155 15.9155 0 0 1 0 31.831
+                                a 15.9155 15.9155 0 0 1 0 -31.831" stroke-dasharray="78, 100"></path>
+<text class="percentage font-stats-lg text-[10px] font-bold" x="18" y="20.35">78%</text>
+</svg>
+<p class="font-body-sm text-body-sm text-center text-on-surface-variant mt-2">Target: 85% by Q4</p>
+</div>
+<!-- AI Alerts Panel (Span 4 Cols) -->
+<div class="md:col-span-4 md:row-span-2 bg-surface-container-lowest border border-border-subtle rounded-lg p-6 card-shadow flex flex-col">
+<div class="flex justify-between items-center mb-4 border-b border-border-subtle pb-2">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]" data-icon="memory">memory</span>
+                                AI Diagnostics
+                            </span>
+<span class="px-2 py-1 bg-error-container text-on-error-container rounded-full font-label-md text-[10px]">2 Active</span>
+</div>
+<div class="flex flex-col gap-4 overflow-y-auto pr-2">
+<!-- Alert Item -->
+<div class="p-3 border border-error/30 bg-error-container/10 rounded-DEFAULT flex gap-3 items-start">
+<span class="material-symbols-outlined text-critical mt-0.5" data-icon="warning">warning</span>
+<div>
+<h4 class="font-label-md text-label-md text-on-surface">Anomalous Temp Rise</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Sector B showing continuous 2Â°C elevation above predicted model for past 4 hours.</p>
+<span class="font-label-md text-[10px] text-on-surface-variant mt-2 block">10 mins ago â¢ Sensor T-42</span>
+</div>
+</div>
+<!-- Alert Item -->
+<div class="p-3 border border-warning/30 bg-warning/10 rounded-DEFAULT flex gap-3 items-start">
+<span class="material-symbols-outlined text-warning mt-0.5" data-icon="science">science</span>
+<div>
+<h4 class="font-label-md text-label-md text-on-surface">Soil pH Deviation</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Expected: 6.5. Current: 5.8. Potential runoff detected near watercourse Alpha.</p>
+<span class="font-label-md text-[10px] text-on-surface-variant mt-2 block">1 hr ago â¢ Sensor P-12</span>
+</div>
+</div>
+<!-- Normal Status -->
+<div class="p-3 border border-success/30 bg-success/10 rounded-DEFAULT flex gap-3 items-start opacity-70">
+<span class="material-symbols-outlined text-success mt-0.5" data-icon="check_circle">check_circle</span>
+<div>
+<h4 class="font-label-md text-label-md text-on-surface">Canopy Density Nominal</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Satellite analysis matches expected growth curve.</p>
+<span class="font-label-md text-[10px] text-on-surface-variant mt-2 block">4 hrs ago â¢ Sat-Link</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Drone/Satellite Imagery Gallery (Span 8 Cols) -->
+<div class="md:col-span-8 bg-surface-container-lowest border border-border-subtle rounded-lg p-6 card-shadow flex flex-col">
+<div class="flex justify-between items-center mb-4">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest">Recent Imagery Scans</span>
+<button class="text-primary font-label-md text-label-md hover:underline">View All Archives</button>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 flex-1">
+<!-- Image 1 -->
+<div class="relative group overflow-hidden rounded-DEFAULT border border-border-subtle">
+<div class="bg-cover bg-center w-full h-32 md:h-full min-h-[120px] transition-transform duration-300 group-hover:scale-105" data-alt="High-resolution, top-down drone imagery of a dense, recovering forest canopy. The lighting is bright and scientific, emphasizing varying shades of green vegetation against patches of healthy soil. The aesthetic is clean, precise, and data-driven." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuApLVzoJNvwpzX20J_pE8WjXbYIuaGsZ2icBcwd0i3LJFvDmPSlbbTQeEYjkFZV7ZPQ8R0G1nI9cNw_N3FfHrStJfAXWjqJBShDkTs6rAEyM-bz-3JmmdJkUubtHaC0kz4oEpq3z0sRKb-FtW6slzRu7hJAcv0M_Ub7lhYm-xt051N-TOj0gBbb56g58opnjIYoVpDCw4oU796Fb8l9DV-M5u-3MGnM-fPywqHR6JckQZXe8JVqXh-4')"></div>
+<div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-charcoal/80 to-transparent p-2">
+<span class="font-label-md text-[10px] text-white flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="flight">flight</span> 10:45 AM
+                                    </span>
+</div>
+</div>
+<!-- Image 2 -->
+<div class="relative group overflow-hidden rounded-DEFAULT border border-border-subtle">
+<div class="bg-cover bg-center w-full h-32 md:h-full min-h-[120px] transition-transform duration-300 group-hover:scale-105" data-alt="False-color satellite imagery of a restoration site. The image shows distinct thermal zones in blues, purples, and deep reds against a stark black background. The style is highly technical, analytical, and reminiscent of high-end GIS software interfaces." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBRIfB99xq6iTYzJbmsap04SaozoTZg5Y4tr2tObQtXwOMgIl_XKroBvwMR7ZAwvmUBvLMmM8cNXmss8JxwBTjqfzaLhoKA74FPOCbUZbuviahwF4s_bTjcgiHGzrNChd-1izszM-NHhHvlwAjtcoAIyFjjrw1c1ZRYwGQgjbQVOT1mrqQlbICIjdJOPoE3HkxzqWSNmZFc6RimhTYyW7V3jGmvybOWn1x4LDAuAnPqTUjMKEqVxTz5')"></div>
+<div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-charcoal/80 to-transparent p-2">
+<span class="font-label-md text-[10px] text-white flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="satellite">satellite</span> 08:00 AM (NDVI)
+                                    </span>
+</div>
+</div>
+<!-- Image 3 -->
+<div class="relative group overflow-hidden rounded-DEFAULT border border-border-subtle">
+<div class="bg-cover bg-center w-full h-32 md:h-full min-h-[120px] transition-transform duration-300 group-hover:scale-105" data-alt="Close-up, high-definition photograph of new sapling growth emerging from dark, rich soil in a controlled restoration environment. Soft, diffuse, natural lighting highlights the delicate green leaves. The overall mood is optimistic yet grounded in precise environmental science." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCdkfOGGfr6-RBUgcgLjFzFOa7YmR8A2jHExeggXMJsoiOg60adZFwrdAt_ayZdE4nHH3tQF7zdSeGWB4LF_-lO_fbWL2fklzddkTvvx7DE321HlovXO0BAUjRuZmW-wXF69h0wcPoJwkDP7nVIHCOVojrgKNs6Xf3R_nwymHqujk9gdn4BnO4i2Tmc_C2YGpb8wMUZTc5K2RZH1Rnh8VSw4zhsjE-k0jpdoqWSt4Nr2SCFvvDQmqUi')"></div>
+<div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-charcoal/80 to-transparent p-2">
+<span class="font-label-md text-[10px] text-white flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="photo_camera">photo_camera</span> Ground Strata
+                                    </span>
+</div>
+</div>
+<!-- Image 4 -->
+<div class="relative group overflow-hidden rounded-DEFAULT border border-border-subtle bg-surface-container flex items-center justify-center">
+<div class="text-center p-4">
+<span class="material-symbols-outlined text-on-surface-variant text-[32px] mb-2" data-icon="add_a_photo">add_a_photo</span>
+<p class="font-label-md text-[10px] text-on-surface-variant">Next scan scheduled: 14:00</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Monitoring Log Timeline (Span 12 Cols) -->
+<div class="md:col-span-12 bg-surface-container-lowest border border-border-subtle rounded-lg p-6 card-shadow">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest mb-6 block">Monitoring Log</span>
+<div class="relative border-l border-border-subtle ml-3 space-y-6">
+<!-- Timeline Item -->
+<div class="relative pl-6">
+<div class="absolute -left-[5px] top-1 w-2.5 h-2.5 rounded-full bg-primary border-2 border-surface-container-lowest"></div>
+<div class="flex justify-between items-start md:items-center flex-col md:flex-row gap-2">
+<div>
+<span class="font-label-md text-label-md text-primary block">11:32 AM</span>
+<h4 class="font-body-md text-body-md font-semibold text-on-surface">Data Sync Completed</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Successfully pulled updated telemetry from 45/45 nodes in Sector B.</p>
+</div>
+<span class="px-2 py-1 bg-surface-container text-on-surface-variant rounded-full font-label-md text-[10px] border border-border-subtle">System Auto</span>
+</div>
+</div>
+<!-- Timeline Item -->
+<div class="relative pl-6">
+<div class="absolute -left-[5px] top-1 w-2.5 h-2.5 rounded-full bg-critical border-2 border-surface-container-lowest"></div>
+<div class="flex justify-between items-start md:items-center flex-col md:flex-row gap-2">
+<div>
+<span class="font-label-md text-label-md text-critical block">10:15 AM</span>
+<h4 class="font-body-md text-body-md font-semibold text-on-surface">Alert Triggered: Temp Anomaly</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Sensor T-42 reported values outside normal operating parameters.</p>
+</div>
+<span class="px-2 py-1 bg-surface-container text-on-surface-variant rounded-full font-label-md text-[10px] border border-border-subtle">AI Diagnostic</span>
+</div>
+</div>
+<!-- Timeline Item -->
+<div class="relative pl-6">
+<div class="absolute -left-[5px] top-1 w-2.5 h-2.5 rounded-full bg-success border-2 border-surface-container-lowest"></div>
+<div class="flex justify-between items-start md:items-center flex-col md:flex-row gap-2">
+<div>
+<span class="font-label-md text-label-md text-success block">08:00 AM</span>
+<h4 class="font-body-md text-body-md font-semibold text-on-surface">Daily Satellite Pass</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">NDVI imagery captured and processed. Vegetation index steady.</p>
+</div>
+<span class="px-2 py-1 bg-surface-container text-on-surface-variant rounded-full font-label-md text-[10px] border border-border-subtle">External Integration</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>
