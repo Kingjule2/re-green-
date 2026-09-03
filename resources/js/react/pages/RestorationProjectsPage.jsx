@@ -1,13 +1,24 @@
 import React, { useState, useRef, useEffect } from 'react';
+import KpiCard from '../components/shared/KpiCard';
 import StatusBadge from '../components/shared/StatusBadge';
 import { gsap } from '@/gsap';
+
+const PAGE_SIZE = 3;
 
 export default function RestorationProjectsPage() {
     const [search, setSearch] = useState('');
     const [statusFilter, setStatusFilter] = useState('all');
     const [regionFilter, setRegionFilter] = useState('all');
+    const [showMoreFilters, setShowMoreFilters] = useState(false);
+    const [minProgress, setMinProgress] = useState(0);
+    const [page, setPage] = useState(1);
     const [selectedProject, setSelectedProject] = useState(null);
     const pageRef = useRef(null);
+
+    // Any filter change invalidates the current page offset.
+    useEffect(() => {
+        setPage(1);
+    }, [search, statusFilter, regionFilter, minProgress]);
 
     useEffect(() => {
         if (pageRef.current) {
@@ -96,8 +107,15 @@ export default function RestorationProjectsPage() {
             regionFilter === 'all' ||
             p.location.toLowerCase().includes(regionFilter.toLowerCase());
 
-        return matchesSearch && matchesStatus && matchesRegion;
+        return matchesSearch && matchesStatus && matchesRegion && p.progress >= minProgress;
     });
+
+    const totalPages = Math.max(1, Math.ceil(filteredProjects.length / PAGE_SIZE));
+    const pageNumbers = Array.from({ length: totalPages }, (_, index) => index + 1);
+    const startIndex = (page - 1) * PAGE_SIZE;
+    const visibleProjects = filteredProjects.slice(startIndex, startIndex + PAGE_SIZE);
+    const firstEntry = filteredProjects.length === 0 ? 0 : startIndex + 1;
+    const lastEntry = startIndex + visibleProjects.length;
 
     return (
         <div ref={pageRef} className="space-y-6 animate-in fade-in duration-300">
@@ -127,6 +145,35 @@ export default function RestorationProjectsPage() {
                         New Site
                     </button>
                 </div>
+            </div>
+
+            {/* KPI Cards Grid */}
+            <div className="stagger-proj grid grid-cols-1 md:grid-cols-3 gap-6">
+                <KpiCard
+                    title="Total Projects"
+                    value="12"
+                    trend="+2 this quarter"
+                    icon="account_tree"
+                    trendIcon="trending_up"
+                    delay={0.1}
+                />
+                <KpiCard
+                    title="Active Area (ha)"
+                    value="2,450"
+                    trend="0% change"
+                    trendTone="neutral"
+                    icon="landscape"
+                    trendIcon="horizontal_rule"
+                    delay={0.2}
+                />
+                <KpiCard
+                    title="Total Reforested (ha)"
+                    value="327"
+                    trend="+15%"
+                    icon="forest"
+                    trendIcon="trending_up"
+                    delay={0.3}
+                />
             </div>
 
             {/* Filter Bar */}
@@ -171,10 +218,53 @@ export default function RestorationProjectsPage() {
                     </select>
                 </div>
 
-                <div className="text-xs text-outline font-semibold w-full sm:w-auto text-right">
-                    Showing {filteredProjects.length} of {projects.length} sites
+                <div className="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-end">
+                    <span className="text-xs text-outline font-semibold">
+                        Showing {filteredProjects.length} of {projects.length} sites
+                    </span>
+                    <button
+                        onClick={() => setShowMoreFilters((open) => !open)}
+                        aria-expanded={showMoreFilters}
+                        className={`flex items-center gap-2 px-3 py-2 border rounded-lg font-label-md text-label-md transition-colors ${
+                            showMoreFilters
+                                ? 'border-primary text-primary bg-surface-container'
+                                : 'border-border-subtle text-on-surface-variant hover:text-primary hover:border-primary bg-surface-bright'
+                        }`}
+                    >
+                        <span className="material-symbols-outlined text-[18px]">filter_list</span>
+                        More Filters
+                    </button>
                 </div>
             </div>
+
+            {/* Advanced Filters */}
+            {showMoreFilters && (
+                <div className="bg-surface-container-lowest border border-border-subtle rounded-xl p-4 shadow-xs flex flex-col sm:flex-row items-start sm:items-center gap-4 animate-in fade-in slide-in-from-top-1">
+                    <label
+                        htmlFor="min-recovery"
+                        className="font-label-md text-label-md text-on-surface-variant uppercase shrink-0"
+                    >
+                        Min Recovery Progress
+                    </label>
+                    <input
+                        id="min-recovery"
+                        type="range"
+                        min="0"
+                        max="100"
+                        step="5"
+                        value={minProgress}
+                        onChange={(e) => setMinProgress(Number(e.target.value))}
+                        className="w-full sm:w-64 h-1 bg-border-subtle rounded-lg appearance-none cursor-pointer accent-primary"
+                    />
+                    <span className="font-label-md text-label-md text-primary w-12 shrink-0">{minProgress}%</span>
+                    <button
+                        onClick={() => setMinProgress(0)}
+                        className="font-label-md text-label-md text-primary hover:underline sm:ml-auto"
+                    >
+                        Reset
+                    </button>
+                </div>
+            )}
 
             {/* Table */}
             <div className="stagger-proj bg-surface-container-lowest border border-border-subtle rounded-xl shadow-xs overflow-hidden">
@@ -191,7 +281,7 @@ export default function RestorationProjectsPage() {
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-border-subtle text-xs">
-                            {filteredProjects.map((p) => (
+                            {visibleProjects.map((p) => (
                                 <tr
                                     key={p.id}
                                     onClick={() => setSelectedProject(p)}
@@ -239,22 +329,46 @@ export default function RestorationProjectsPage() {
                 </div>
 
                 {/* Table Footer / Pagination */}
-                <div className="px-6 py-3.5 border-t border-border-subtle bg-surface-bright flex items-center justify-between text-xs text-on-surface-variant">
-                    <span>Showing 1 to {filteredProjects.length} entries</span>
-                    <div className="flex items-center gap-1">
-                        <button className="p-1 rounded hover:bg-surface-container text-outline disabled:opacity-50" disabled>
+                <div className="px-6 py-3.5 border-t border-border-subtle bg-surface-bright flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-on-surface-variant">
+                    <span>
+                        {filteredProjects.length === 0
+                            ? 'No entries match the current filters'
+                            : `Showing ${firstEntry} to ${lastEntry} of ${filteredProjects.length} entries`}
+                    </span>
+                    <nav className="flex items-center gap-1" aria-label="Table pagination">
+                        <button
+                            onClick={() => setPage((current) => Math.max(1, current - 1))}
+                            disabled={page === 1}
+                            className="p-1 rounded hover:bg-surface-container text-outline disabled:opacity-50 disabled:hover:bg-transparent"
+                            aria-label="Previous page"
+                        >
                             <span className="material-symbols-outlined text-[18px]">chevron_left</span>
                         </button>
-                        <button className="w-7 h-7 rounded bg-primary-container text-white font-bold flex items-center justify-center">
-                            1
-                        </button>
-                        <button className="w-7 h-7 rounded hover:bg-surface-container text-on-surface font-semibold flex items-center justify-center">
-                            2
-                        </button>
-                        <button className="p-1 rounded hover:bg-surface-container text-outline">
+
+                        {pageNumbers.map((pageNumber) => (
+                            <button
+                                key={pageNumber}
+                                onClick={() => setPage(pageNumber)}
+                                aria-current={pageNumber === page ? 'page' : undefined}
+                                className={`w-7 h-7 rounded flex items-center justify-center font-semibold transition-colors ${
+                                    pageNumber === page
+                                        ? 'bg-primary-container text-on-primary font-bold'
+                                        : 'hover:bg-surface-container text-on-surface'
+                                }`}
+                            >
+                                {pageNumber}
+                            </button>
+                        ))}
+
+                        <button
+                            onClick={() => setPage((current) => Math.min(totalPages, current + 1))}
+                            disabled={page >= totalPages}
+                            className="p-1 rounded hover:bg-surface-container text-outline disabled:opacity-50 disabled:hover:bg-transparent"
+                            aria-label="Next page"
+                        >
                             <span className="material-symbols-outlined text-[18px]">chevron_right</span>
                         </button>
-                    </div>
+                    </nav>
                 </div>
             </div>
 

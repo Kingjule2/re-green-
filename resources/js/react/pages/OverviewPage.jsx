@@ -114,7 +114,23 @@ export default function OverviewPage({ onNavigate }) {
                         <div className="flex gap-2">
                             <button
                                 onClick={() => onNavigate('land-intelligence')}
-                                className="px-3 py-1.5 border border-border-subtle rounded-lg text-xs font-semibold text-primary hover:bg-surface-container transition-colors flex items-center gap-1"
+                                className="p-2 border border-border-subtle rounded-lg text-outline hover:text-primary hover:bg-surface-container transition-colors"
+                                title="Layers"
+                                aria-label="Map layers"
+                            >
+                                <span className="material-symbols-outlined text-[18px]">layers</span>
+                            </button>
+                            <button
+                                onClick={() => onNavigate('restoration-projects')}
+                                className="p-2 border border-border-subtle rounded-lg text-outline hover:text-primary hover:bg-surface-container transition-colors"
+                                title="Filter"
+                                aria-label="Filter map results"
+                            >
+                                <span className="material-symbols-outlined text-[18px]">filter_list</span>
+                            </button>
+                            <button
+                                onClick={() => onNavigate('land-intelligence')}
+                                className="px-3 py-1.5 border border-border-subtle rounded-lg font-label-md text-label-md text-primary hover:bg-surface-container transition-colors flex items-center gap-1"
                             >
                                 <span className="material-symbols-outlined text-[16px]">map</span>
                                 Full GIS
@@ -154,6 +170,9 @@ export default function OverviewPage({ onNavigate }) {
                                         </li>
                                         <li className="flex items-center gap-2">
                                             <span className="w-2.5 h-2.5 rounded-full bg-critical"></span> Critical (Coastal Zone)
+                                        </li>
+                                        <li className="flex items-center gap-2">
+                                            <span className="w-2.5 h-2.5 rounded-full bg-info"></span> Planned (Not yet started)
                                         </li>
                                     </ul>
                                 </div>

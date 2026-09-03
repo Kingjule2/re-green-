@@ -1,23 +1,32 @@
 import React, { useRef, useEffect } from 'react';
 import { gsap } from '@/gsap';
 
+const TREND_TONES = {
+    positive: 'text-success',
+    negative: 'text-critical',
+    neutral: 'text-on-surface-variant',
+};
+
 export default function KpiCard({
     title,
     value,
     unit = '',
     trend = null,
     isPositive = true,
+    trendTone = null,
     icon = 'landscape',
     trendIcon = 'trending_up',
     className = '',
     delay = 0,
 }) {
+    const tone = trendTone ?? (isPositive ? 'positive' : 'negative');
     const numberRef = useRef(null);
     const cardRef = useRef(null);
 
     useEffect(() => {
-        // Numeric counter animation if value is numeric
-        const numericVal = parseFloat(value);
+        // Numeric counter animation if value is numeric. Thousands separators are
+        // stripped first, otherwise parseFloat('2,450') yields 2.
+        const numericVal = parseFloat(String(value).replace(/,/g, ''));
         if (!isNaN(numericVal) && numberRef.current) {
             const isFloat = String(value).includes('.');
             const obj = { val: 0 };
@@ -53,7 +62,7 @@ export default function KpiCard({
             </div>
 
             <div className="flex items-baseline gap-2 mb-2">
-                <span ref={numberRef} className="font-stats-lg text-stats-lg text-on-surface font-bold text-3xl md:text-4xl text-primary">
+                <span ref={numberRef} className="font-stats-lg text-stats-lg text-primary dark:text-primary-fixed">
                     {value}
                 </span>
                 {unit && (
@@ -65,8 +74,8 @@ export default function KpiCard({
 
             {trend && (
                 <div
-                    className={`flex items-center gap-1 font-label-md text-xs font-semibold ${
-                        isPositive ? 'text-success' : 'text-critical'
+                    className={`flex items-center gap-1 font-label-md text-label-md ${
+                        TREND_TONES[tone] ?? TREND_TONES.positive
                     }`}
                 >
                     <span className="material-symbols-outlined text-[16px]" aria-hidden="true">

@@ -1,10 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
-import StatusBadge from '../components/shared/StatusBadge';
 import { gsap } from '@/gsap';
+
+const FORMAT_FILTERS = ['All', 'PDF', 'CSV'];
 
 export default function ImpactReportsPage() {
     const [selectedProject, setSelectedProject] = useState('Kalimantan Restoration Project');
     const [reportType, setReportType] = useState('Comprehensive ESG Overview');
+    const [formatFilter, setFormatFilter] = useState('All');
+    const [showFilter, setShowFilter] = useState(false);
     const [isGenerating, setIsGenerating] = useState(false);
     const pageRef = useRef(null);
 
@@ -44,6 +47,9 @@ export default function ImpactReportsPage() {
             icon: 'water_drop',
         },
     ];
+
+    const visibleReports =
+        formatFilter === 'All' ? reports : reports.filter((rep) => rep.formats.includes(formatFilter));
 
     const handleGenerate = (e) => {
         e.preventDefault();
@@ -136,16 +142,58 @@ export default function ImpactReportsPage() {
             <div className="stagger-rep grid grid-cols-1 lg:grid-cols-12 gap-6">
                 {/* Generated Reports List (8 cols) */}
                 <div className="lg:col-span-8 bg-surface-container-lowest border border-border-subtle rounded-xl shadow-xs flex flex-col overflow-hidden">
-                    <div className="p-5 border-b border-border-subtle flex justify-between items-center bg-surface-bright">
+                    <div className="p-5 border-b border-border-subtle flex justify-between items-center gap-3 bg-surface-bright">
                         <div>
-                            <h3 className="font-headline-md text-lg font-bold text-on-surface">
+                            <h3 className="font-headline-md text-headline-sm text-on-surface">
                                 Generated Audit Reports
                             </h3>
-                            <p className="text-xs text-outline">Verified PDFs and raw accounting CSV files</p>
+                            <p className="font-body-sm text-xs text-outline">
+                                Verified PDFs and raw accounting CSV files
+                            </p>
                         </div>
-                        <span className="text-xs font-semibold text-outline">
-                            4 Archived Reports
-                        </span>
+
+                        <div className="flex items-center gap-3 shrink-0">
+                            <span className="font-label-md text-label-md text-outline hidden sm:inline">
+                                {visibleReports.length} Archived
+                            </span>
+
+                            {/* Format Filter */}
+                            <div className="relative">
+                                <button
+                                    onClick={() => setShowFilter((open) => !open)}
+                                    aria-expanded={showFilter}
+                                    aria-label="Filter reports by format"
+                                    className={`p-1.5 rounded-lg transition-colors ${
+                                        formatFilter === 'All'
+                                            ? 'text-primary hover:bg-surface-container'
+                                            : 'text-on-primary bg-primary-container'
+                                    }`}
+                                >
+                                    <span className="material-symbols-outlined text-[20px]">filter_list</span>
+                                </button>
+
+                                {showFilter && (
+                                    <div className="absolute right-0 mt-2 w-40 bg-surface-container-lowest border border-border-subtle rounded-lg card-shadow p-1 z-20 animate-in fade-in slide-in-from-top-1">
+                                        {FORMAT_FILTERS.map((option) => (
+                                            <button
+                                                key={option}
+                                                onClick={() => {
+                                                    setFormatFilter(option);
+                                                    setShowFilter(false);
+                                                }}
+                                                className={`w-full text-left px-3 py-2 rounded font-label-md text-label-md transition-colors ${
+                                                    formatFilter === option
+                                                        ? 'bg-surface-container text-primary'
+                                                        : 'text-on-surface-variant hover:bg-surface-container-low'
+                                                }`}
+                                            >
+                                                {option === 'All' ? 'All formats' : `${option} only`}
+                                            </button>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                        </div>
                     </div>
 
                     <div className="overflow-x-auto">
@@ -159,7 +207,7 @@ export default function ImpactReportsPage() {
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-border-subtle text-xs">
-                                {reports.map((rep, idx) => (
+                                {visibleReports.map((rep, idx) => (
                                     <tr
                                         key={idx}
                                         className="hover:bg-surface-container-low transition-colors group cursor-pointer"
@@ -190,10 +238,10 @@ export default function ImpactReportsPage() {
                                         <td className="p-4 text-right">
                                             <button
                                                 onClick={() => alert(`Downloading ${rep.title}`)}
-                                                className="text-primary hover:underline font-semibold flex items-center justify-end w-full gap-1"
+                                                className="text-primary font-label-md text-label-md flex items-center justify-end w-full gap-1 transition-opacity opacity-100 sm:opacity-0 sm:group-hover:opacity-100 focus-visible:opacity-100 hover:underline"
                                             >
-                                                <span className="material-symbols-outlined text-[16px]">download</span>
-                                                Export
+                                                <span className="material-symbols-outlined text-[18px]">download</span>
+                                                Download
                                             </button>
                                         </td>
                                     </tr>
@@ -216,10 +264,14 @@ export default function ImpactReportsPage() {
                         <form onSubmit={handleGenerate} className="space-y-4 text-xs">
                             {/* Project Select */}
                             <div>
-                                <label className="block font-label-md font-semibold text-on-surface-variant mb-1">
+                                <label
+                                    htmlFor="project-select"
+                                    className="block font-label-md text-label-md text-on-surface-variant mb-1"
+                                >
                                     Concession / Project
                                 </label>
                                 <select
+                                    id="project-select"
                                     value={selectedProject}
                                     onChange={(e) => setSelectedProject(e.target.value)}
                                     className="w-full bg-surface-bright border border-border-subtle rounded-lg px-3 py-2 text-on-surface font-medium focus:outline-none focus:border-primary"
@@ -233,10 +285,14 @@ export default function ImpactReportsPage() {
 
                             {/* Report Type */}
                             <div>
-                                <label className="block font-label-md font-semibold text-on-surface-variant mb-1">
+                                <label
+                                    htmlFor="report-type"
+                                    className="block font-label-md text-label-md text-on-surface-variant mb-1"
+                                >
                                     Report Framework
                                 </label>
                                 <select
+                                    id="report-type"
                                     value={reportType}
                                     onChange={(e) => setReportType(e.target.value)}
                                     className="w-full bg-surface-bright border border-border-subtle rounded-lg px-3 py-2 text-on-surface font-medium focus:outline-none focus:border-primary"
@@ -250,17 +306,19 @@ export default function ImpactReportsPage() {
 
                             {/* Date Range */}
                             <div>
-                                <label className="block font-label-md font-semibold text-on-surface-variant mb-1">
+                                <span className="block font-label-md text-label-md text-on-surface-variant mb-1">
                                     Audit Date Range
-                                </label>
+                                </span>
                                 <div className="grid grid-cols-2 gap-2">
                                     <input
                                         type="date"
+                                        aria-label="Start date"
                                         defaultValue="2026-01-01"
                                         className="bg-surface-bright border border-border-subtle rounded-lg px-2.5 py-1.5 text-on-surface focus:outline-none focus:border-primary"
                                     />
                                     <input
                                         type="date"
+                                        aria-label="End date"
                                         defaultValue="2026-09-01"
                                         className="bg-surface-bright border border-border-subtle rounded-lg px-2.5 py-1.5 text-on-surface focus:outline-none focus:border-primary"
                                     />
@@ -269,20 +327,20 @@ export default function ImpactReportsPage() {
 
                             {/* Format Checkboxes */}
                             <div>
-                                <label className="block font-label-md font-semibold text-on-surface-variant mb-2">
+                                <span className="block font-label-md text-label-md text-on-surface-variant mb-2">
                                     Export Format
-                                </label>
-                                <div className="flex gap-4">
+                                </span>
+                                <div className="flex flex-wrap gap-4">
                                     <label className="flex items-center gap-1.5 cursor-pointer">
-                                        <input type="checkbox" defaultChecked className="rounded text-primary focus:ring-primary" />
+                                        <input type="checkbox" defaultChecked className="control-checkbox" />
                                         <span>PDF Report</span>
                                     </label>
                                     <label className="flex items-center gap-1.5 cursor-pointer">
-                                        <input type="checkbox" defaultChecked className="rounded text-primary focus:ring-primary" />
+                                        <input type="checkbox" className="control-checkbox" />
                                         <span>Raw CSV</span>
                                     </label>
                                     <label className="flex items-center gap-1.5 cursor-pointer">
-                                        <input type="checkbox" className="rounded text-primary focus:ring-primary" />
+                                        <input type="checkbox" className="control-checkbox" />
                                         <span>GeoJSON</span>
                                     </label>
                                 </div>

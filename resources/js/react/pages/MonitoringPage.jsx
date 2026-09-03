@@ -1,6 +1,32 @@
 import React, { useState, useRef, useEffect } from 'react';
-import StatusBadge from '../components/shared/StatusBadge';
 import { gsap } from '@/gsap';
+
+const MONITORING_LOG = [
+    {
+        time: '11:32 AM',
+        title: 'Data Sync Completed',
+        detail: 'Successfully pulled updated telemetry from 45/45 nodes in Sector B.',
+        source: 'System Auto',
+        dot: 'bg-primary',
+        timeColor: 'text-primary',
+    },
+    {
+        time: '10:15 AM',
+        title: 'Alert Triggered: Temp Anomaly',
+        detail: 'Sensor T-42 reported values outside normal operating parameters.',
+        source: 'AI Diagnostic',
+        dot: 'bg-critical',
+        timeColor: 'text-critical',
+    },
+    {
+        time: '08:00 AM',
+        title: 'Daily Satellite Pass',
+        detail: 'NDVI imagery captured and processed. Vegetation index steady.',
+        source: 'External Integration',
+        dot: 'bg-success',
+        timeColor: 'text-success',
+    },
+];
 
 export default function MonitoringPage() {
     const [isSyncing, setIsSyncing] = useState(false);
@@ -214,30 +240,26 @@ export default function MonitoringPage() {
                             <div
                                 className="bg-cover bg-center w-full h-32 transition-transform duration-500 group-hover:scale-110"
                                 style={{
-                                    backgroundImage: `url('https://lh3.googleusercontent.com/aida-public/AB6AXuCmYclg098wRHehaJn8Ex4fbZyX5EzDtNKWq8TSdIHm1z8WUEc_D7H6g-GABH7rEWeuCO3VNcTzvEDV7LKb5Qpr0OXWgsbziY0hvq9M6Eo2GzKKn9OETt3fRGJ0UMqvnP6n1zGkt0sarmCJ1_yDyweuFcrPIlrZ7CbNRF4-wPwQ1jCy015AGALDWXNyLafTORQiEU4O_bRmEK6Y8uc5GBCnKVG-noeMDApuCSuQ1NpYOtwdcZohd4Hz')`,
+                                    backgroundImage: `url('https://lh3.googleusercontent.com/aida-public/AB6AXuCdkfOGGfr6-RBUgcgLjFzFOa7YmR8A2jHExeggXMJsoiOg60adZFwrdAt_ayZdE4nHH3tQF7zdSeGWB4LF_-lO_fbWL2fklzddkTvvx7DE321HlovXO0BAUjRuZmW-wXF69h0wcPoJwkDP7nVIHCOVojrgKNs6Xf3R_nwymHqujk9gdn4BnO4i2Tmc_C2YGpb8wMUZTc5K2RZH1Rnh8VSw4zhsjE-k0jpdoqWSt4Nr2SCFvvDQmqUi')`,
                                 }}
                             />
                             <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-charcoal/90 via-charcoal/40 to-transparent p-2 text-white">
                                 <span className="font-label-md text-[10px] flex items-center gap-1 font-semibold">
-                                    <span className="material-symbols-outlined text-[13px]">landscape</span>
-                                    Yesterday • GIS Grid
+                                    <span className="material-symbols-outlined text-[13px]">photo_camera</span>
+                                    Ground Strata
                                 </span>
                             </div>
                         </div>
 
-                        {/* Scan 4 */}
-                        <div className="relative group overflow-hidden rounded-lg border border-border-subtle shadow-xs">
-                            <div
-                                className="bg-cover bg-center w-full h-32 transition-transform duration-500 group-hover:scale-110"
-                                style={{
-                                    backgroundImage: `url('https://lh3.googleusercontent.com/aida-public/AB6AXuApLVzoJNvwpzX20J_pE8WjXbYIuaGsZ2icBcwd0i3LJFvDmPSlbbTQeEYjkFZV7ZPQ8R0G1nI9cNw_N3FfHrStJfAXWjqJBShDkTs6rAEyM-bz-3JmmdJkUubtHaC0kz4oEpq3z0sRKb-FtW6slzRu7hJAcv0M_Ub7lhYm-xt051N-TOj0gBbb56g58opnjIYoVpDCw4oU796Fb8l9DV-M5u-3MGnM-fPywqHR6JckQZXe8JVqXh-4')`,
-                                }}
-                            />
-                            <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-charcoal/90 via-charcoal/40 to-transparent p-2 text-white">
-                                <span className="font-label-md text-[10px] flex items-center gap-1 font-semibold">
-                                    <span className="material-symbols-outlined text-[13px]">radar</span>
-                                    Hydrology Thermal
+                        {/* Scan 4 — next scheduled pass placeholder */}
+                        <div className="relative overflow-hidden rounded-lg border border-dashed border-border-subtle bg-surface-container flex items-center justify-center h-32">
+                            <div className="text-center p-4">
+                                <span className="material-symbols-outlined text-on-surface-variant text-[32px] mb-2">
+                                    add_a_photo
                                 </span>
+                                <p className="font-label-md text-[10px] text-on-surface-variant">
+                                    Next scan scheduled: 14:00
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -294,6 +316,40 @@ export default function MonitoringPage() {
                             </div>
                         </div>
                     </div>
+                </div>
+
+                {/* 5. Monitoring Log Timeline (12 Cols) */}
+                <div className="stagger-card md:col-span-12 bg-surface-container-lowest border border-border-subtle rounded-xl p-6 card-shadow">
+                    <span className="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest mb-6 block">
+                        Monitoring Log
+                    </span>
+
+                    <ol className="relative border-l border-border-subtle ml-3 space-y-6">
+                        {MONITORING_LOG.map((entry) => (
+                            <li key={entry.time} className="relative pl-6">
+                                <span
+                                    className={`absolute -left-[5px] top-1 w-2.5 h-2.5 rounded-full border-2 border-surface-container-lowest ${entry.dot}`}
+                                    aria-hidden="true"
+                                />
+                                <div className="flex justify-between items-start md:items-center flex-col md:flex-row gap-2">
+                                    <div>
+                                        <span className={`font-label-md text-label-md block ${entry.timeColor}`}>
+                                            {entry.time}
+                                        </span>
+                                        <h4 className="font-body-md text-body-md font-semibold text-on-surface">
+                                            {entry.title}
+                                        </h4>
+                                        <p className="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                                            {entry.detail}
+                                        </p>
+                                    </div>
+                                    <span className="px-2 py-1 bg-surface-container text-on-surface-variant rounded-full font-label-md text-[10px] border border-border-subtle shrink-0">
+                                        {entry.source}
+                                    </span>
+                                </div>
+                            </li>
+                        ))}
+                    </ol>
                 </div>
             </div>
         </div>

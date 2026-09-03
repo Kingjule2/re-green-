@@ -53,7 +53,8 @@ export default function TopBar({
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         placeholder="Search params, sectors..."
-                        className="bg-transparent border-none focus:ring-0 text-body-sm font-body-sm p-0 w-36 md:w-52 text-on-surface placeholder:text-outline text-xs outline-none"
+                        className="bg-transparent border-none focus:ring-0 text-body-sm font-body-sm p-0 w-36 md:w-52 text-on-surface placeholder:text-outline outline-none"
+                        aria-label="Search projects, sectors and parameters"
                     />
                 </div>
 
