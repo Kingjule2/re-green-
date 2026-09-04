@@ -4,4 +4,4 @@ Before planning or editing, find the row whose globs match the file's path and r
 
 | Applies to | Rule file |
 | --- | --- |
-| package.json | .ai/rules/general.md |
+| package.json, composer.json | .ai/rules/general.md |

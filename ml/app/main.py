@@ -13,7 +13,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app import __version__
 from app.config import settings
-from app.routers import health, predict
+from app.routers import health, land, predict
 
 app = FastAPI(
     title=settings.app_name,
@@ -34,3 +34,4 @@ app.include_router(health.router)
 
 # Versioned, API-key-protected inference surface.
 app.include_router(predict.router, prefix="/api/v1")
+app.include_router(land.router, prefix="/api/v1")

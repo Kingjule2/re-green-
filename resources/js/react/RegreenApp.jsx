@@ -4,6 +4,7 @@ import TopBar from './components/layout/TopBar';
 import OverviewPage from './pages/OverviewPage';
 import MonitoringPage from './pages/MonitoringPage';
 import LandIntelligencePage from './pages/LandIntelligencePage';
+import DroneAnalysisPage from './pages/DroneAnalysisPage';
 import RestorationProjectsPage from './pages/RestorationProjectsPage';
 import ImpactReportsPage from './pages/ImpactReportsPage';
 import CommunityImpactPage from './pages/CommunityImpactPage';
@@ -13,6 +14,7 @@ const PAGE_TITLES = {
     overview: 'Overview Dashboard',
     'restoration-projects': 'Restoration Projects',
     'land-intelligence': 'Land Intelligence & GIS',
+    'drone-analysis': 'Drone Land Analysis',
     monitoring: 'Live Monitoring',
     community: 'Community & Social Impact',
     'impact-reports': 'Impact & Carbon Reports',
@@ -67,6 +69,8 @@ export default function RegreenApp() {
                 return <MonitoringPage />;
             case 'land-intelligence':
                 return <LandIntelligencePage />;
+            case 'drone-analysis':
+                return <DroneAnalysisPage />;
             case 'restoration-projects':
                 return <RestorationProjectsPage />;
             case 'impact-reports':

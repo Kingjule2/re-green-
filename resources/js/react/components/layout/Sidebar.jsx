@@ -4,6 +4,7 @@ const NAV_ITEMS = [
     { id: 'overview', label: 'Overview', icon: 'dashboard' },
     { id: 'restoration-projects', label: 'Restoration Projects', icon: 'forest' },
     { id: 'land-intelligence', label: 'Land Intelligence', icon: 'map' },
+    { id: 'drone-analysis', label: 'Drone Analysis', icon: 'flight' },
     { id: 'monitoring', label: 'Monitoring', icon: 'visibility' },
     { id: 'community', label: 'Community', icon: 'groups' },
     { id: 'impact-reports', label: 'Impact Reports', icon: 'assessment' },

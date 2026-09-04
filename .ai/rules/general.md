@@ -1,6 +1,7 @@
 ---
 paths:
   - package.json
+  - composer.json
 ---
 
 # General
@@ -11,3 +12,6 @@ Vite 8 uses rolldown, whose native binary `@rolldown/binding-win32-x64-msvc` dec
 Fix: run Node >= 20.19 (22 LTS or newer preferred). Stopgap only: `npm install @rolldown/binding-win32-x64-msvc --no-save --force`, which any later `npm ci` will undo.
 
 Also note: a bad global registry in ~/.npmrc (`https://registry.npmjs` instead of `https://registry.npmjs.org`) breaks every npm/npx call in this project with ENOTFOUND.
+
+## Run artisan and PHPUnit with PHP 8.3, not the 8.2 on PATH
+The default `php` on PATH is 8.2.32, but this project requires PHP ^8.3 and the dev deps (PHPUnit 12 / sebastian/environment use typed class constants) fail to parse on 8.2 with "unexpected identifier STDIN". Use the Laragon 8.3 binary for any artisan/test/pint run, e.g. `& 'D:\laragon\bin\php\php-8.3.33-Win32-vs16-x64\php.exe' artisan test`. The 8.3 build has pdo_sqlite, pdo_pgsql, gd, and fileinfo enabled. App code itself stays 8.2-compatible.

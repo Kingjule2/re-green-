@@ -5,6 +5,8 @@ pydantic>=2.9
 pydantic-settings>=2.5
 python-dotenv>=1.0
 httpx>=0.27
+python-multipart>=0.0.9   # multipart image uploads (UploadFile/File)
+pillow>=11.0              # colour-based land-cover baseline (ships cp314 wheels)
 
 # --- ML / AI libraries (uncomment as the modelling work begins) ---
 # NOTE: On Python 3.14 some of these may not have prebuilt wheels yet. If pip
