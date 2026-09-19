@@ -1,0 +1,18 @@
+# Detector stack for the YOLOv8 burn model. Deliberately separate from
+# requirements.txt: `ultralytics` pulls in torch, which is ~2 GB and has no
+# cp314 wheel yet, while the service must keep importing (and the colour
+# heuristic must keep working) without it.
+#
+# Install into a Python 3.12 / 3.13 virtualenv:
+#     pip install -r requirements-ml.txt
+#
+# torch: prefer the platform selector at <https://pytorch.org/get-started/locally/>
+# (CPU-only builds are ~10x smaller; a CUDA build is only worth it for training
+# on a GPU). GPU training also wants the matching CUDA runtime, which the
+# selector handles for you.
+#
+# numpy: ultralytics needs it for the box maths; it has cp314 wheels, so 3.14
+# only fails on torch.
+ultralytics>=8.3
+torch>=2.4
+numpy>=1.26

@@ -1,0 +1,30 @@
+# Base service dependencies (kept light so they install cleanly on Python 3.14).
+fastapi>=0.115
+uvicorn[standard]>=0.34
+pydantic>=2.9
+pydantic-settings>=2.5
+python-dotenv>=1.0
+httpx>=0.27
+python-multipart>=0.0.9   # multipart image uploads (UploadFile/File)
+pillow>=11.0              # colour-based land-cover baseline (ships cp314 wheels)
+
+# Terrain context (DEM sampling). The SRTM source needs Earth Engine; DEMNAS is
+# plain HTTP. Both are imported lazily, so the service runs without this too.
+earthengine-api>=1.4
+
+# --- ML / AI libraries ---
+# The YOLOv8 burn detector needs `ultralytics` + `torch`, which are kept out of
+# this file so the base service stays installable everywhere: see
+# requirements-ml.txt. Without them the service still runs and land analysis
+# falls back to the colour heuristic.
+#
+# NOTE: On Python 3.14 some of these may not have prebuilt wheels yet. If pip
+# tries to build from source and fails, pin to a version that ships a cp314
+# wheel or run this service on Python 3.12 instead.
+# numpy>=2.1
+# pandas>=2.2
+# scikit-learn>=1.5
+# joblib>=1.4          # persist/lo­ad sklearn models
+# onnxruntime>=1.19    # fast, dependency-light inference
+# transformers>=4.44
+# openai>=1.40         # hosted LLM client

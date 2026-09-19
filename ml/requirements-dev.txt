@@ -1,0 +1,6 @@
+-r requirements.txt
+
+# Local development / test tooling.
+pytest>=8.3
+pytest-asyncio>=0.24
+ruff>=0.6
