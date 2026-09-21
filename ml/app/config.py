@@ -5,6 +5,7 @@ from __future__ import annotations
 from functools import lru_cache
 from typing import Literal
 
+from pydantic import field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -32,7 +33,23 @@ class Settings(BaseSettings):
 
     # CORS origins allowed to call this service directly (e.g. the Vite dev
     # server). Comma-separated in the env var, e.g. "http://localhost:5173".
-    allowed_origins: list[str] = ["http://localhost:5173"]
+    allowed_origins: str | list[str] = ["http://localhost:5173"]
+
+    @field_validator("allowed_origins", mode="before")
+    @classmethod
+    def _parse_allowed_origins(cls, value: object) -> list[str]:
+        if isinstance(value, str):
+            s = value.strip()
+            if s.startswith("[") and s.endswith("]"):
+                import json
+                try:
+                    return json.loads(s)
+                except Exception:
+                    pass
+            return [v.strip() for v in s.split(",") if v.strip()]
+        if isinstance(value, (list, tuple)):
+            return [str(v) for v in value]
+        return ["http://localhost:5173"]
 
     # Where model artifacts live on disk.
     model_dir: str = "models"

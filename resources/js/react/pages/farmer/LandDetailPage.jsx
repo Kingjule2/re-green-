@@ -25,6 +25,7 @@ import CropRanking from '@/react/components/farmer/CropRanking';
 import LandForm from '@/react/components/farmer/LandForm';
 import PhotoUploader from '@/react/components/farmer/PhotoUploader';
 import PlantingGuideCard from '@/react/components/farmer/PlantingGuideCard';
+import FarmZoningPlanner from '@/react/components/farmer/FarmZoningPlanner';
 import RecommendationList from '@/react/components/farmer/RecommendationList';
 import { Button, Chip, DetailRow, ErrorPanel, LoadingBlock, Panel } from '@/react/components/farmer/primitives';
 import { describeError, tDetector, tMethod } from '@/react/components/farmer/labels';
@@ -291,6 +292,8 @@ export default function LandDetailPage() {
             )}
 
             <PlantingGuideCard plantingPlan={land.planting_plan} />
+
+            <FarmZoningPlanner land={land} latestAnalysis={latest} />
 
             <CarbonPanel landId={id} carbon={land.carbon} canApply={isOwner} onSubmitted={reload} />
 

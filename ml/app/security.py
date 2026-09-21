@@ -14,7 +14,7 @@ async def require_api_key(x_api_key: str | None = Header(default=None)) -> None:
     local development but must never be the case in production. Wire this as a
     dependency on any router that performs real work.
     """
-    if settings.api_key is None:
+    if not settings.api_key:
         return
 
     if x_api_key is None or x_api_key != settings.api_key:

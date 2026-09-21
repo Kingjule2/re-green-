@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AnalysisRunController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CarbonController;
 use App\Http\Controllers\Api\DashboardController;
+use App\Http\Controllers\Api\DroneAnalysisController;
 use App\Http\Controllers\Api\LandAnalysisController;
 use App\Http\Controllers\Api\LandController;
 use App\Http\Controllers\Api\MapController;
@@ -31,6 +32,13 @@ Route::prefix('v1')->middleware('web')->group(function (): void {
 
     Route::post('auth/register', [AuthController::class, 'register']);
     Route::post('auth/login', [AuthController::class, 'login']);
+
+    // Drone analysis: currently no auth guard — the controller scopes by
+    // session when one is present.  Protect before production.
+    Route::get('drone-analyses', [DroneAnalysisController::class, 'index']);
+    Route::post('drone-analyses', [DroneAnalysisController::class, 'store']);
+    Route::get('drone-analyses/{analysis}', [DroneAnalysisController::class, 'show']);
+    Route::delete('drone-analyses/{analysis}', [DroneAnalysisController::class, 'destroy']);
 
     Route::middleware('auth')->group(function (): void {
         Route::get('auth/me', [AuthController::class, 'me']);

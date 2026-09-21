@@ -77,18 +77,20 @@ def main(argv: list[str] | None = None) -> int:
 
 def collect_metrics(metrics: Any, *, weights: str, data: str) -> dict:
     """Normalize an ultralytics validation result into a plain report dict."""
-    box = getattr(metrics, "box", None)
+    # Use segmentation metrics if available, otherwise bounding box metrics
+    target = getattr(metrics, "seg", None) or getattr(metrics, "box", None)
 
     return {
         "weights": weights,
         "data": data,
+        "task": "segment" if getattr(metrics, "seg", None) is not None else "detect",
         "overall": {
-            "map50": _number(getattr(box, "map50", None)),
-            "map50_95": _number(getattr(box, "map", None)),
-            "precision": _number(getattr(box, "mp", None)),
-            "recall": _number(getattr(box, "mr", None)),
+            "map50": _number(getattr(target, "map50", None)),
+            "map50_95": _number(getattr(target, "map", None)),
+            "precision": _number(getattr(target, "mp", None)),
+            "recall": _number(getattr(target, "mr", None)),
         },
-        "per_class": _per_class(box, getattr(metrics, "names", None)),
+        "per_class": _per_class(target, getattr(metrics, "names", None)),
     }
 
 

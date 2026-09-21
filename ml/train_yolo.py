@@ -101,8 +101,8 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--out",
-        default=DEFAULT_OUT,
-        help=f"where the best weights are copied (default: {DEFAULT_OUT})",
+        default=None,
+        help="where the best weights are copied (default: deduced from --data and --model)",
     )
     return parser
 
@@ -116,7 +116,22 @@ def main(argv: list[str] | None = None) -> int:
         print(f"ultralytics is not installed ({exc}). Install requirements-ml.txt first.")
         return 1
 
-    print(f"Training {args.model} on {args.data} for {args.epochs} epochs at {args.imgsz} px")
+    is_seg = "-seg" in str(args.model).lower()
+    is_fire = "fire" in str(args.data).lower()
+
+    if args.project == DEFAULT_PROJECT and is_fire:
+        args.project = "runs/fire"
+        args.name = "fire-uav"
+
+    if not args.out:
+        if is_fire:
+            args.out = "models/fire-yolov8n-seg.pt" if is_seg else "models/fire-yolov8n.pt"
+        else:
+            args.out = "models/regreen-burn-yolov8n-seg.pt" if is_seg else "models/regreen-burn-yolov8n.pt"
+
+    print(f"Training {args.model} ({'segmentation' if is_seg else 'detection'}) on {args.data}")
+    print(f"Epochs: {args.epochs} | Image size: {args.imgsz} px | Batch size: {args.batch}")
+    print(f"Destination target: {args.out}")
     model = YOLO(args.model)
     model.train(
         data=args.data,
